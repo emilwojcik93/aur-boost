@@ -4,7 +4,7 @@ Shell Script to boost AUR building time
 This script will check declared parameters in `/etc/makepkg.conf` and change them for more efficient to speed up compiling AUR packages.
 
 ### Oneliners to run from internet
-### (downloads with `wget` or `curl` to `/tmp`):
+(downloads with `wget` or `curl` to `/tmp`):
 ```bash
 # using wget with SSL
 wget 'https://raw.githubusercontent.com/emilwojcik93/aur-boost/main/aur-boost.sh' -O "/tmp/aur-boost.sh" && chmod 755 "/tmp/aur-boost.sh" && sudo /tmp/aur-boost.sh
