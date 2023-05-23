@@ -89,14 +89,14 @@ allfn() {
 statusfn() {
   # get current values of parameters supported by this script
   local file="/etc/makepkg.conf"
-  echo -e "Current value in \"${file}\": `grep "^CFLAGS" ${file}`"
-  echo -e "Current value in \"${file}\": `grep "^MAKEFLAGS" ${file}`"
-  echo -e "Current value in \"${file}\": `grep "^COMPRESSZST" ${file}`"
+  echo -e "Current value in \"${file}\": \"`grep "^CFLAGS" ${file}`\""
+  echo -e "Current value in \"${file}\": \"`grep "^MAKEFLAGS" ${file}`\""
+  echo -e "Current value in \"${file}\": \"`grep "^COMPRESSZST" ${file}`\""
   unset file
   local file="/usr/bin/makepkg"
-  echo -e "Current value in \"${file}\":  `grep "^SKIPCHECKSUMS" ${file}`"
-  echo -e "Current value in \"${file}\":  `grep "^SKIPPGPCHECK" ${file}`"
-  echo -e "Current value in \"${file}\":  `grep "^SKIPPGPCHECK" ${file}`"
+  echo -e "Current value in \"${file}\":  \"`grep "^SKIPCHECKSUMS" ${file}`\""
+  echo -e "Current value in \"${file}\":  \"`grep "^SKIPPGPCHECK" ${file}`\""
+  echo -e "Current value in \"${file}\":  \"`grep "^SKIPPGPCHECK" ${file}`\""
 }
 
 function helpfn() {
