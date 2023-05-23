@@ -10,6 +10,7 @@ and change them for more efficient to speed up compiling AUR packages.
 
 ## Help example:
 ```bash
+user@host:~# sudo ./aur-boost.sh --help
 Script to boost AUR building time (script supports short names for parameters)
 
 Using script:
@@ -29,7 +30,7 @@ help - get this message
 
 ## Help example:
 ```bash
-root@host:~# sudo ./aur-boost.sh --status
+user@host:~# sudo ./aur-boost.sh --status
 Current value in "/etc/makepkg.conf": "CFLAGS="-march=native -O2 -pipe -fno-plt -fexceptions \"
 Current value in "/etc/makepkg.conf": "MAKEFLAGS="-j$(nproc)""
 Current value in "/etc/makepkg.conf": "COMPRESSZST=(zstd -1 -c -z -q -)"
