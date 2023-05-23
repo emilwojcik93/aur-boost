@@ -1,0 +1,1 @@
+`basename ${0} .sh | sed "s/`${basename "${0}"}`%.*//"`
