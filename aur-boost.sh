@@ -74,10 +74,16 @@ function rewritePackagefn() {
   fi
 }
 
+function installfn() {
+  # install most common packages required by AUR
+  sudo yes | pacman -Syyu --needed patch make flex bison
+}
+
 allfn() {
   # statc run for both config and package "makepkg"
   rewriteConfig && \
-  rewritePackage
+  rewritePackage && \
+  installfn
 }
 
 statusfn() {
@@ -95,7 +101,7 @@ statusfn() {
 
 function helpfn() {
   # help how use script
-  echo -e "Script to boost AUR building time\n\nUsing script:\n\n${GREEN}`basename "${0}"`${NC} [--config|--package|--all|--help]\n\n${GREEN}config${NC} - rewrite config file \"/etc/makepkg.conf\" (this is default [none] parameter)\n\n${GREEN}package${NC} - rewrite package file \"/usr/bin/makepkg\" ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}all${NC} - rewrite both, config and package files ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}help${NC} - get this message\n"
+  echo -e "Script to boost AUR building time (script supports short names for parameters)\n\nUsing script:\n\n${GREEN}`basename "${0}"`${NC} [--config|--package|--install|--all|--help]\n\n${GREEN}config${NC} - rewrite config file \"/etc/makepkg.conf\" (this is default [none] parameter)\n\n${GREEN}package${NC} - rewrite package file \"/usr/bin/makepkg\" ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}install${NC} - install most common dependencies required for building process of many AUR packages\n\n${GREEN}all${NC} - rewrite both, config and package files and install deps ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}help${NC} - get this message\n"
   exit 0
 }
 
@@ -106,6 +112,7 @@ namingfn() {
       --help|-h )                                                            helpfn ;;
       --config|-c )                                                 rewriteConfigfn ;;
       --package|-p )                                               rewritePackagefn ;;
+      --install|-i )                                                      installfn ;;
       --all|-a )                                                              allfn ;;
       --status|-s )                                                        statusfn ;;
       "" )                                                          rewriteConfigfn ;;
