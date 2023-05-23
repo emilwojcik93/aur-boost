@@ -18,7 +18,7 @@ curl -L 'https://raw.githubusercontent.com/emilwojcik93/aur-boost/main/aur-boost
 # using curl WITHOUT SSL
 curl -k -L 'https://raw.githubusercontent.com/emilwojcik93/aur-boost/main/aur-boost.sh' -o "/tmp/aur-boost.sh" && chmod 755 "/tmp/aur-boost.sh" && sudo /tmp/aur-boost.sh
 ```
-### Install using `git`
+### Execute using `git`
 Clone it in current directory and execute `aur-boost.sh`
 ```
 # git clone git@github.com:emilwojcik93/aur-boost.git
