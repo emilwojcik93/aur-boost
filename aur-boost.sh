@@ -78,13 +78,26 @@ function installfn() {
   # install most common packages required by AUR
   sudo yes | \
   pacman -Syyu --needed \
+         pkgconfig \
+         base-devel \
+         devtools \
+         gcc \
          patch \
          make \
          flex \
          bison \
-         ed
+         ed \
+         xmlto \
+         kmod \
+         inetutils \
+         bc \
+         libelf \
+         git \
+         cpio \
+         perl \
+         tar \
+         xz
 }
-
 allfn() {
   # statc run for both config and package "makepkg"
   rewriteConfigfn && \
