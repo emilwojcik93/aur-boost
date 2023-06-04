@@ -76,13 +76,19 @@ function rewritePackagefn() {
 
 function installfn() {
   # install most common packages required by AUR
-  sudo yes | pacman -Syyu --needed patch make flex bison
+  sudo yes | \
+  pacman -Syyu --needed \
+         patch \
+         make \
+         flex \
+         bison \
+         ed
 }
 
 allfn() {
   # statc run for both config and package "makepkg"
-  rewriteConfig && \
-  rewritePackage && \
+  rewriteConfigfn && \
+  rewritePackagefn && \
   installfn
 }
 
