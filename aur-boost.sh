@@ -80,7 +80,6 @@ function installfn() {
   pacman -Syyu --needed \
          pkgconfig \
          base-devel \
-         devtools \
          gcc \
          patch \
          make \
