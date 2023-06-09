@@ -47,6 +47,13 @@ function rewriteConfigfn() {
   else
     echo -e "Can not find target value: MAKEFLAGS=\"-j2\"\nCurrent value: \"`grep "^MAKEFLAGS" ${file}`\""
   fi
+
+  if findStringfn '#BUILDDIR=/tmp/makepkg' ${file}; then
+    sed -i 's|#BUILDDIR=/tmp/makepkg|BUILDDIR=/tmp/makepkg|g' ${file}
+    echo -e "Value in \"${file}\" successfuly replaced to: `grep "^BUILDDIR" ${file}`"
+  else
+    echo -e "Can not find target value: #BUILDDIR=/tmp/makepkg\nCurrent value: \"`grep "^BUILDDIR" ${file}`\""
+  fi
   
   if findStringfn 'COMPRESSZST=(zstd -c -z -q -)' ${file}; then
     sudo sed -i 's#COMPRESSZST=(zstd -c -z -q -)#COMPRESSZST=(zstd -1 -c -z -q -)#g' ${file}
@@ -77,7 +84,7 @@ function rewritePackagefn() {
 function installfn() {
   # install most common packages required by AUR
   sudo yes | \
-  pacman -Syyu --needed \
+  pacman -Syy --needed \
          pkgconfig \
          base-devel \
          gcc \
@@ -109,6 +116,7 @@ statusfn() {
   local file="/etc/makepkg.conf"
   echo -e "Current value in \"${file}\": \"`grep "^CFLAGS" ${file}`\""
   echo -e "Current value in \"${file}\": \"`grep "^MAKEFLAGS" ${file}`\""
+  echo -e "Current value in \"${file}\": \"`grep "^BUILDDIR" ${file}`\""
   echo -e "Current value in \"${file}\": \"`grep "^COMPRESSZST" ${file}`\""
   unset file
   local file="/usr/bin/makepkg"
