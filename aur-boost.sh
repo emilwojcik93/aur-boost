@@ -31,7 +31,7 @@ function findStringfn() {
   fi
 }
 
-function rewriteConfigfn() {
+function rewriteConfigFn() {
   # static rewrite for file: "/etc/makepkg.conf"
   local file="/etc/makepkg.conf"
   if findStringfn '\-march=x86-64 -mtune=generic' ${file}; then
@@ -63,7 +63,7 @@ function rewriteConfigfn() {
   fi
 }
 
-function rewritePackagefn() {
+function rewritePackageFn() {
   # static rewrite for file: "/usr/bin/makepkg"
   local file="/usr/bin/makepkg"
   if findStringfn 'SKIPCHECKSUMS=0' ${file}; then
@@ -81,7 +81,7 @@ function rewritePackagefn() {
   fi
 }
 
-function installfn() {
+function installFn() {
   # install most common packages required by AUR
   sudo yes | \
   pacman -Syy --needed \
@@ -104,14 +104,14 @@ function installfn() {
          tar \
          xz
 }
-allfn() {
+allFn() {
   # statc run for both config and package "makepkg"
-  rewriteConfigfn && \
-  rewritePackagefn && \
-  installfn
+  rewriteConfigFn && \
+  rewritePackageFn && \
+  installFn
 }
 
-statusfn() {
+statusFn() {
   # get current values of parameters supported by this script
   local file="/etc/makepkg.conf"
   echo -e "Current value in \"${file}\": \"`grep "^CFLAGS" ${file}`\""
@@ -122,33 +122,32 @@ statusfn() {
   local file="/usr/bin/makepkg"
   echo -e "Current value in \"${file}\":  \"`grep "^SKIPCHECKSUMS" ${file}`\""
   echo -e "Current value in \"${file}\":  \"`grep "^SKIPPGPCHECK" ${file}`\""
-  echo -e "Current value in \"${file}\":  \"`grep "^SKIPPGPCHECK" ${file}`\""
 }
 
-function helpfn() {
+function helpFn() {
   # help how use script
   echo -e "Script to boost AUR building time (script supports short names for parameters)\n\nUsing script:\n\n${GREEN}`basename "${0}"`${NC} [--config|--package|--install|--all|--help]\n\n${GREEN}config${NC} - rewrite config file \"/etc/makepkg.conf\" (this is default [none] parameter)\n\n${GREEN}package${NC} - rewrite package file \"/usr/bin/makepkg\" ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}install${NC} - install most common dependencies required for building process of many AUR packages\n\n${GREEN}all${NC} - rewrite both, config and package files and install deps ${RED}(it can be HARMFUL)${NC}\n\n${GREEN}help${NC} - get this message\n"
   exit 0
 }
 
-namingfn() {
+namingFn() {
   # start or stop services
-  # echo "namingfn: ${OPTION1}"
+  # echo "namingFn: ${OPTION1}"
   case "${OPTION1}" in
-      --help|-h )                                                            helpfn ;;
-      --config|-c )                                                 rewriteConfigfn ;;
-      --package|-p )                                               rewritePackagefn ;;
-      --install|-i )                                                      installfn ;;
-      --all|-a )                                                              allfn ;;
-      --status|-s )                                                        statusfn ;;
-      "" )                                                          rewriteConfigfn ;;
-      * ) echo -e "${RED}Parameter \"${OPTION1}\" is not supported.${NC}" && helpfn ;;
+      --help|-h )                                                            helpFn ;;
+      --config|-c )                                                 rewriteConfigFn ;;
+      --package|-p )                                               rewritePackageFn ;;
+      --install|-i )                                                      installFn ;;
+      --all|-a )                                                              allFn ;;
+      --status|-s )                                                        statusFn ;;
+      "" )                                                          rewriteConfigFn ;;
+      * ) echo -e "${RED}Parameter \"${OPTION1}\" is not supported.${NC}" && helpFn ;;
   esac
 }
 
-main() {
-  namingfn ${OPTION1}
+mainFn() {
+  namingFn ${OPTION1}
 }
 
 #just run
-main ${1}
+mainFn ${1}

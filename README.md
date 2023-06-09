@@ -33,9 +33,9 @@ help - get this message
 user@host:~# sudo ./aur-boost.sh --status
 Current value in "/etc/makepkg.conf": "CFLAGS="-march=native -O2 -pipe -fno-plt -fexceptions \"
 Current value in "/etc/makepkg.conf": "MAKEFLAGS="-j$(nproc)""
+Current value in "/etc/makepkg.conf": "BUILDDIR=/tmp/makepkg"
 Current value in "/etc/makepkg.conf": "COMPRESSZST=(zstd -1 -c -z -q -)"
 Current value in "/usr/bin/makepkg":  "SKIPCHECKSUMS=1"
-Current value in "/usr/bin/makepkg":  "SKIPPGPCHECK=1"
 Current value in "/usr/bin/makepkg":  "SKIPPGPCHECK=1"
 ```
 
