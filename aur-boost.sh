@@ -22,7 +22,7 @@ if [[ ${EUID} -ne 0 ]]; then
   exit 1
 fi
 
-function findStringfn() {
+function findStringFn() {
   # grep values in file
   if grep -q "${1}" ${2}; then
     return 0
@@ -34,28 +34,28 @@ function findStringfn() {
 function rewriteConfigFn() {
   # static rewrite for file: "/etc/makepkg.conf"
   local file="/etc/makepkg.conf"
-  if findStringfn '\-march=x86-64 -mtune=generic' ${file}; then
+  if findStringFn '\-march=x86-64 -mtune=generic' ${file}; then
     sed -i 's#-march=x86-64 -mtune=generic#-march=native#g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: `grep "^CFLAGS" ${file}`"
   else
     echo -e "Can not find target value: \"-march=x86-64 -mtune=generic\"\nCurrent value: \"`grep "^CFLAGS" ${file}`\""
   fi
   
-  if findStringfn 'MAKEFLAGS="-j2"' ${file}; then
+  if findStringFn 'MAKEFLAGS="-j2"' ${file}; then
     sed -i 's#MAKEFLAGS="-j2"#MAKEFLAGS="-j$(nproc)"#g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: `grep "^MAKEFLAGS" ${file}`"
   else
     echo -e "Can not find target value: MAKEFLAGS=\"-j2\"\nCurrent value: \"`grep "^MAKEFLAGS" ${file}`\""
   fi
 
-  if findStringfn '#BUILDDIR=/tmp/makepkg' ${file}; then
+  if findStringFn '#BUILDDIR=/tmp/makepkg' ${file}; then
     sed -i 's|#BUILDDIR=/tmp/makepkg|BUILDDIR=/tmp/makepkg|g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: `grep "^BUILDDIR" ${file}`"
   else
     echo -e "Can not find target value: #BUILDDIR=/tmp/makepkg\nCurrent value: \"`grep "^BUILDDIR" ${file}`\""
   fi
   
-  if findStringfn 'COMPRESSZST=(zstd -c -z -q -)' ${file}; then
+  if findStringFn 'COMPRESSZST=(zstd -c -z -q -)' ${file}; then
     sudo sed -i 's#COMPRESSZST=(zstd -c -z -q -)#COMPRESSZST=(zstd -1 -c -z -q -)#g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: \"`grep "^COMPRESSZST" ${file}`\""
   else
@@ -66,14 +66,14 @@ function rewriteConfigFn() {
 function rewritePackageFn() {
   # static rewrite for file: "/usr/bin/makepkg"
   local file="/usr/bin/makepkg"
-  if findStringfn 'SKIPCHECKSUMS=0' ${file}; then
+  if findStringFn 'SKIPCHECKSUMS=0' ${file}; then
     sed -i 's#SKIPCHECKSUMS=0#SKIPCHECKSUMS=1#g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: `grep "^SKIPCHECKSUMS" ${file}`"
   else
     echo -e "Can not find target value: \"SKIPCHECKSUMS=0\"\nCurrent value: \"`grep "^SKIPCHECKSUMS" ${file}`\""
   fi
   
-  if findStringfn 'SKIPPGPCHECK=0' ${file}; then
+  if findStringFn 'SKIPPGPCHECK=0' ${file}; then
     sed -i 's#SKIPPGPCHECK=0#SKIPPGPCHECK=1#g' ${file}
     echo -e "Value in \"${file}\" successfuly replaced to: `grep "^SKIPPGPCHECK" ${file}`"
   else
