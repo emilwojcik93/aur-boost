@@ -51,7 +51,7 @@ wget --no-check-certificate 'https://raw.githubusercontent.com/emilwojcik93/aur-
 ```
 ### using curl with SSL
 ```bash
-curl -L 'https://raw.githubusercontent.com/emilwojcik93/aur-boost/main/aur-boost.sh' -o "/tmp/aur-boost.sh" && chmod 755 "/tmp/aur-boost.sh" && sudo /tmp/aur-boost.sh
+curl --proto '=https' --tlsv1.2 -sSfL 'https://raw.githubusercontent.com/emilwojcik93/aur-boost/main/aur-boost.sh' -o "/tmp/aur-boost.sh" && chmod 755 "/tmp/aur-boost.sh" && sudo /tmp/aur-boost.sh
 ```
 ### using curl WITHOUT SSL
 ```bash
