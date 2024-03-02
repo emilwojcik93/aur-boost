@@ -115,7 +115,13 @@ statusFn() {
   # get current values of parameters supported by this script
   local file="/etc/makepkg.conf"
   echo -e "Current value in \"${file}\": \"`grep "^CFLAGS" ${file}`\""
-  echo -e "Current value in \"${file}\": \"`grep "^MAKEFLAGS" ${file}`\""
+  if grep -q "^MAKEFLAGS" ${file}; then
+    echo -e "Current value in \"${file}\": \"`grep "^MAKEFLAGS" ${file}`\""
+  elif grep -q "^#MAKEFLAGS" ${file}; then
+    echo -e "MAKEFLAGS is commented out in \"${file}\": \"`grep "^#MAKEFLAGS" ${file}`\""
+  else
+    echo -e "MAKEFLAGS is not set in \"${file}\"."
+  fi
   echo -e "Current value in \"${file}\": \"`grep "^BUILDDIR" ${file}`\""
   echo -e "Current value in \"${file}\": \"`grep "^COMPRESSZST" ${file}`\""
   unset file
